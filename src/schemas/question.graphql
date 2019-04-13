@@ -1,39 +1,30 @@
-enum UserType {
-  unregistered
-  registered
-  moderator
-  team_admin
-  or
-  does_not_exist
-}
-
-scalar Date
-
-type User {
-  reputation: Int
-  user_id: Int!
-  user_type: UserType
-  profile_image: String
-  display_name: String
-  link: String
-}
-
 type Question {
   tags: [String]
   owner: User
-  is_answered: Boolean
-  view_count: Int
-  answer_count: Int
+  isAnswered: Boolean
+  viewCount: Int
+  answerCount: Int
   score: Int
-  last_activity_date: Date
-  creation_date: Date
-  last_edit_date: Date
-  question_id: Int!
+  lastActivityDate: Date
+  creationDate: Date
+  lastEditDate: Date
+  questionId: Int!
   link: String
   title: String
+  answers(page: Int, pagesize: Int): AnwsersResponse
+}
+
+type GetQuestionsResponse {
+  data: [Question]
+  hasMore: Boolean
+}
+
+type AnwsersResponse {
+  data: [Answer]
+  hasMore: Boolean
 }
 
 type Query {
-  getQuestions(intitle: String, offset: Int, limit: Int): [Question]
-  question(user_id: Int!): Question
+  getQuestions(intitle: String, page: Int, pagesize: Int): GetQuestionsResponse
+  question(questionId: Int!): Question
 }

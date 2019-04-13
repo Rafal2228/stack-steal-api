@@ -1,0 +1,10 @@
+type Answer {
+  owner: User
+  isAccepted: Boolean
+  score: Int
+  lastActivityDate: Date
+  creationDate: Date
+  answerId: Int
+  questionId: Int
+  bodyMarkdown: String
+}

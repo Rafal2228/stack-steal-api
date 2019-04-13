@@ -1,0 +1,17 @@
+enum UserType {
+  unregistered
+  registered
+  moderator
+  teamAdmin
+  or
+  doesNotExist
+}
+
+type User {
+  reputation: Int
+  userId: Int!
+  userType: UserType
+  profileImage: String
+  displayName: String
+  link: String
+}

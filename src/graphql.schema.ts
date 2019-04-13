@@ -9,15 +9,36 @@ export enum UserType {
     unregistered = "unregistered",
     registered = "registered",
     moderator = "moderator",
-    team_admin = "team_admin",
+    teamAdmin = "teamAdmin",
     or = "or",
-    does_not_exist = "does_not_exist"
+    doesNotExist = "doesNotExist"
+}
+
+export class Answer {
+    owner?: User;
+    isAccepted?: boolean;
+    score?: number;
+    lastActivityDate?: Date;
+    creationDate?: Date;
+    answerId?: number;
+    questionId?: number;
+    bodyMarkdown?: string;
+}
+
+export class AnwsersResponse {
+    data?: Answer[];
+    hasMore?: boolean;
+}
+
+export class GetQuestionsResponse {
+    data?: Question[];
+    hasMore?: boolean;
 }
 
 export abstract class IQuery {
-    abstract getQuestions(): Question[] | Promise<Question[]>;
+    abstract getQuestions(intitle?: string, page?: number, pagesize?: number): GetQuestionsResponse | Promise<GetQuestionsResponse>;
 
-    abstract question(user_id: number, intitle?: string, offset?: number, limit?: number): Question | Promise<Question>;
+    abstract question(questionId: number): Question | Promise<Question>;
 
     abstract temp__(): boolean | Promise<boolean>;
 }
@@ -25,24 +46,25 @@ export abstract class IQuery {
 export class Question {
     tags?: string[];
     owner?: User;
-    is_answered?: boolean;
-    view_count?: number;
-    answer_count?: number;
+    isAnswered?: boolean;
+    viewCount?: number;
+    answerCount?: number;
     score?: number;
-    last_activity_date?: Date;
-    creation_date?: Date;
-    last_edit_date?: Date;
-    question_id: number;
+    lastActivityDate?: Date;
+    creationDate?: Date;
+    lastEditDate?: Date;
+    questionId: number;
     link?: string;
     title?: string;
+    answers?: AnwsersResponse;
 }
 
 export class User {
     reputation?: number;
-    user_id: number;
-    user_type?: UserType;
-    profile_image?: string;
-    display_name?: string;
+    userId: number;
+    userType?: UserType;
+    profileImage?: string;
+    displayName?: string;
     link?: string;
 }
 
