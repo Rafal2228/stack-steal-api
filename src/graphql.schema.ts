@@ -10,7 +10,6 @@ export enum UserType {
     registered = "registered",
     moderator = "moderator",
     teamAdmin = "teamAdmin",
-    or = "or",
     doesNotExist = "doesNotExist"
 }
 

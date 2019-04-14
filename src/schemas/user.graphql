@@ -3,7 +3,6 @@ enum UserType {
   registered
   moderator
   teamAdmin
-  or
   doesNotExist
 }
 
