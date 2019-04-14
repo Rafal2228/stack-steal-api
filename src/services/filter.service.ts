@@ -1,6 +1,7 @@
 import { HttpService, Injectable } from '@nestjs/common';
-import { APP_KEY, STACK_BASE_URL } from 'src/constants';
-import { StackResponse } from 'src/models/stack-response';
+import { APP_KEY, STACK_BASE_URL } from '../constants';
+import { StackResponse } from '../models/stack-response';
+import { CreateFilterResource } from '../models/create-filter.resource';
 
 @Injectable()
 export class FilterService {
@@ -13,7 +14,7 @@ export class FilterService {
     console.log('Creating answer filter...');
 
     const res = await this.http
-      .post<StackResponse<Array<{ filter: string }>>>(
+      .post<StackResponse<CreateFilterResource[]>>(
         `${this.baseUrl}/create?key=${APP_KEY}&include=answer.body_markdown&unsafe=false`,
       )
       .toPromise();
